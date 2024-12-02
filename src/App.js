@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import About from "./pages/About";
+import ContactUs from "./pages/ContactUs";
+import Home from "./pages/Home";
+import { BrowserRouter, Routes, Route } from "react-router";
+import Services from "./pages/Services";
+import Blog from "./pages/Blog";
+import NotFound from "./pages/NotFound";
+import Products from "./pages/Products";
+import Layout from "./components/layout/Layout";
+import Carts from "./pages/Carts";
+import { CartProvider } from "./context/CartContext";
+import Checkout from "./pages/CheckOut";
+import Paypal from "./components/Payple";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+	<BrowserRouter>
+    <CartProvider>
+		<Routes>
+      <Route path="/" element={<Layout/>}>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/cart" element={<Carts />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/check-out" element={<Checkout/>}/> 
+        <Route path="/payple" element={<Paypal/>} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+    </CartProvider>
+	</BrowserRouter>
   );
 }
 
